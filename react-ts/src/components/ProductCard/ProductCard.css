@@ -1,0 +1,115 @@
+.product-card {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg);
+  transition: box-shadow 0.3s, transform 0.3s;
+
+  &:hover {
+    box-shadow: var(--shadow);
+    transform: translateY(-2px);
+  }
+}
+
+.product-card-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  background: var(--code-bg);
+}
+
+.product-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+}
+
+.product-card-name {
+  margin: 0;
+  font-size: 18px;
+  color: var(--text-h);
+}
+
+.product-card-description {
+  font-size: 14px;
+  line-height: 145%;
+  color: var(--text);
+  flex-grow: 1;
+}
+
+.product-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.product-card-price {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.product-card-button {
+  font-size: 14px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  color: var(--accent);
+  background: var(--accent-bg);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: border-color 0.3s;
+
+  &:hover {
+    border-color: var(--accent-border);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+.product-card-quantity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.product-card-quantity-button {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-h);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.3s;
+
+  &:hover {
+    border-color: var(--accent-border);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+.product-card-quantity-value {
+  min-width: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-h);
+}
+
+.product-card-in-cart {
+  margin: 0;
+  font-size: 13px;
+  color: var(--accent);
+}
