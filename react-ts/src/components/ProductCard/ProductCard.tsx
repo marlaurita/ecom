@@ -1,6 +1,7 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import type { Product } from "../../data/product"
 import './ProductCard.css'
+import { CartContext } from "../../context/CartContext"
 
 interface ProductCardProps {
     product: Product
@@ -8,6 +9,7 @@ interface ProductCardProps {
 
 function ProductCard ({product}: ProductCardProps){
     const [quantity, setQuantity] = useState(0)
+    const {addToCart} = useContext(CartContext)
 
     return (
     <article className="product-card">
@@ -16,9 +18,8 @@ function ProductCard ({product}: ProductCardProps){
             <h3 className="product-card-name"> {product.name}</h3>
             <p className="product-card-description">{product.description}</p>
             <div className="product-card-quantity">
-                <button className="product-card-quantity-button" onClick={()=> setQuantity(quantity-1)}> - </button>
-                <span className="product-card-quantity-value">{quantity}</span>
-                <button className="product-card-quantity-button" onClick={()=> setQuantity(quantity+1)}> + </button>
+                <button className="product-card-quantity-button" onClick={()=> addToCart(product)}> Agregar al carro </button>
+               
             </div>
         </div>
         
