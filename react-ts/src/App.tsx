@@ -1,5 +1,5 @@
 
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import './App.css'
 import ProductCard from './components/ProductCard/ProductCard'
 import { products } from './data/product'
@@ -8,7 +8,33 @@ import { CartContext } from './context/CartContext'
 function App() {
   const [contador, setContador] = useState(0)
   const {items} = useContext(CartContext)
-  console.log(items)
+  const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [productsBE, setProductsBE] = useState([])
+
+  useEffect(()=> {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("https://dummyjson.com/products")
+
+        if (!response.ok) {
+          throw new Error("Falló la carga de productos")
+        }
+
+        const data = await response.json()
+        setProductsBE(data.products)
+      } catch (err: any)  {
+        setError(err.message)
+      } finally {
+        setLoading(false)
+      }
+    } 
+
+    fetchProducts()
+  }, [])
+
+  if (loading) return <p>Loading</p>
+  if (error) return <p>{error}</p>
 
   return (
     <section id="catalog">
@@ -19,11 +45,13 @@ function App() {
         <button onClick={() => setContador(contador +1)}> Contador equivale a {contador}</button>
         <p> Carrito: {items.length} producto(s)</p>
       </div>
+       
       <div className="product-grid">
-        {products.map((product) => (
+        {productsBE.map((product: any) => (
           <ProductCard product={product} key={product.id}/>
         ))}
       </div>
+
     </section>
   )
 }

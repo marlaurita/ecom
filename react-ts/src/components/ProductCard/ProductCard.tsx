@@ -4,7 +4,7 @@ import './ProductCard.css'
 import { CartContext } from "../../context/CartContext"
 
 interface ProductCardProps {
-    product: Product
+    product: any
 }
 
 function ProductCard ({product}: ProductCardProps){
@@ -13,9 +13,9 @@ function ProductCard ({product}: ProductCardProps){
 
     return (
     <article className="product-card">
-        <img className="product-card-image" src={product.image} alt={product.name}/>
+        <img className="product-card-image" src={product.images[0]} alt={product.title}/>
         <div className="product-card-body">
-            <h3 className="product-card-name"> {product.name}</h3>
+            <h3 className="product-card-name"> {product.title}</h3>
             <p className="product-card-description">{product.description}</p>
             <div className="product-card-quantity">
                 <button className="product-card-quantity-button" onClick={()=> addToCart(product)}> Agregar al carro </button>
