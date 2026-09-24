@@ -11,6 +11,7 @@ function App() {
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
   const [productsBE, setProductsBE] = useState([])
+  const [search, setSearch] = useState('')
 
   useEffect(()=> {
     const fetchProducts = async () => {
@@ -33,6 +34,9 @@ function App() {
     fetchProducts()
   }, [])
 
+  const filteredProducts = productsBE.filter((product: any) => 
+    product.title.toLowerCase().includes(search.trim().toLowerCase()))
+
   if (loading) return <p>Loading</p>
   if (error) return <p>{error}</p>
 
@@ -45,11 +49,18 @@ function App() {
         <button onClick={() => setContador(contador +1)}> Contador equivale a {contador}</button>
         <p> Carrito: {items.length} producto(s)</p>
       </div>
+
+      <input type='search' placeholder='Buscar Productos...' value={search} onChange={(e) => setSearch(e.target.value)}/>
        
       <div className="product-grid">
-        {productsBE.map((product: any) => (
+        {filteredProducts.length === 0 ? (
+          <p>No se encontraron productos para: {search}</p>
+        ) : (
+          filteredProducts.map((product: any) => (
           <ProductCard product={product} key={product.id}/>
-        ))}
+        ))
+        )
+      }
       </div>
 
     </section>
