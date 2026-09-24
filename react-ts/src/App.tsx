@@ -1,5 +1,5 @@
 
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import './App.css'
 import ProductCard from './components/ProductCard/ProductCard'
 import { products } from './data/product'
@@ -12,6 +12,7 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [productsBE, setProductsBE] = useState([])
   const [search, setSearch] = useState('')
+  const inputEl = useRef<HTMLInputElement>(null)
 
   useEffect(()=> {
     const fetchProducts = async () => {
@@ -47,10 +48,15 @@ function App() {
         <p>Productos disponibles</p>
 
         <button onClick={() => setContador(contador +1)}> Contador equivale a {contador}</button>
+        <button onClick={() => inputEl.current?.focus()}>Hacer una busqueda</button>
         <p> Carrito: {items.length} producto(s)</p>
       </div>
 
-      <input type='search' placeholder='Buscar Productos...' value={search} onChange={(e) => setSearch(e.target.value)}/>
+      <input type='search'
+      placeholder='Buscar Productos...'
+      value={search} 
+      onChange={(e) => setSearch(e.target.value)}
+      ref={inputEl}/>
        
       <div className="product-grid">
         {filteredProducts.length === 0 ? (
