@@ -2,6 +2,7 @@ import { useContext, useState } from "react"
 import type { Product } from "../../data/product"
 import './ProductCard.css'
 import { CartContext } from "../../context/CartContext"
+import { Link } from "react-router"
 
 interface ProductCardProps {
     product: any
@@ -13,7 +14,9 @@ function ProductCard ({product}: ProductCardProps){
 
     return (
     <article className="product-card">
+        <Link to={`/products/${product.id}`}>
         <img className="product-card-image" src={product.images[0]} alt={product.title}/>
+        </Link>
         <div className="product-card-body">
             <h3 className="product-card-name"> {product.title}</h3>
             <p className="product-card-description">{product.description}</p>

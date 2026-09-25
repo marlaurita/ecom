@@ -1,0 +1,17 @@
+.navbar {
+  display: flex;
+  gap: 24px;
+  padding: 16px 32px;
+  border-bottom: 1px solid var(--border);
+}
+
+.navbar a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+/* NavLink agrega la clase "active" al link de la ruta actual */
+.navbar a.active {
+  color: var(--accent);
+  font-weight: 600;
+}
